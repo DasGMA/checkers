@@ -12,8 +12,11 @@ export default function CheckerBaord() {
 
         for (let i = 0; i < size; i ++) {
             for (let j = 0; j < size; j ++) {
-                console.log('creating board' )
-                row.push(<BoardCell key = {[i, j]} />);
+                if ((i + j)%2 === 0) {
+                    row.push(<BoardCell key = {[i, j]} black={true}/>);
+                } else {
+                    row.push(<BoardCell key = {[i, j]} black={false}/>);
+                }
             }
             
             newGrid.push(<div style = {{textAlign: 'center', justifyContent: 'center'}} className = "row" key={i} >{row}</div>);

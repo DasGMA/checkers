@@ -62,6 +62,23 @@ export default function CheckerBaord() {
                     }
                 }));
                 return;
+
+            case 'top-shape':
+                setShape(shape => ({
+                    ...shape,
+                    top: {
+                        ...shape.top, shape: value
+                    }
+                }));
+                return;
+            case 'bottom-shape':
+                setShape(shape => ({
+                    ...shape,
+                    bottom: {
+                        ...shape.bottom, shape: value
+                    }
+                }));
+                return;
             default: 
                 return;
         }
@@ -94,7 +111,7 @@ console.log(shape)
                         <option value='yellow'>Yellow</option>
                     </select>
 
-                    <label>Select top color</label>
+                    <label>Select bottom color</label>
                     <select
                         name='bottom-shape-color'
                         onChange={handleChange}
@@ -105,13 +122,27 @@ console.log(shape)
                     </select>
                 </div>
 
-                {/* <div style={{background: 'white'}}>
-                    <p>Select shapes</p>
-                    <input
-                        type='radio'
-                        value='Red'
-                    />
-                </div> */}
+                <div style={{background: 'white'}}>
+                    <label>Select top shape</label>
+                    <select
+                        name='top-shape'
+                        onChange={handleChange}
+                    >
+                        <option value='circle'>Select color</option>
+                        <option value='square'>Square</option>
+                        <option value='oval'>Oval</option>
+                    </select>
+
+                    <label>Select top shape</label>
+                    <select
+                        name='bottom-shape'
+                        onChange={handleChange}
+                    >
+                        <option value='circle'>Select color</option>
+                        <option value='square'>Square</option>
+                        <option value='oval'>Oval</option>
+                    </select>
+                </div>
             </div>
         </div>
     )

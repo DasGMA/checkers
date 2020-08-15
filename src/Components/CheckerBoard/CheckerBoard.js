@@ -2,32 +2,37 @@ import React, {useState} from 'react';
 import BoardCell from './BoardCell';
 import '../../Styles/checkerBoard.scss';
 
-
 export default function CheckerBaord() {
-    const [size, setSize] = useState(8);
+    const [size, setSize] = useState({ row: 8, column: 8 });
 
     const renderBoard = () => {
         let newGrid = [];
         let row = [];
 
-        for (let i = 0; i < size; i ++) {
-            for (let j = 0; j < size; j ++) {
-                if ((i + j)%2 === 0) {
-                    row.push(<BoardCell key = {[i, j]} black={true}/>);
-                } else {
-                    row.push(<BoardCell key = {[i, j]} black={false}/>);
-                }
+        for (let i = 0; i < size.column; i ++) {
+            for (let j = 0; j < size.row; j ++) {
+                console.log(newGrid.length - j)
+                row.push(
+                    <BoardCell 
+                        key = {[i, j]} 
+                        black={(i + j)%2 === 0} 
+                        first={j < 2} 
+                        last={size.column - j === 1 || size.column - j === 2}
+                    />
+                );
             }
             
-            newGrid.push(<div style = {{textAlign: 'center', justifyContent: 'center'}} className = "row" key={i} >{row}</div>);
+            newGrid.push(<div className="row" key={i}>{row}</div>);
             row = [];
         }
+       
         return newGrid;
     }
 
     const handleChange = (event) => {
         const {value} = event.target;
-        setSize(value);
+        setSize(size => ({...size, row: value, column: value}));
+        
     }
 
     return (
@@ -35,12 +40,30 @@ export default function CheckerBaord() {
             <div className='board'>
             {renderBoard()}
             </div>
-            <div>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
+                <label style={{color: 'white'}}>CHANGE BOARD SIZE</label>
                 <input 
                     type='number'
-                    value={size}
+                    value={size.column}
                     onChange={handleChange}
                 />
+                {/* <div style={{background: 'white'}}>
+                    <p>Select colors</p>
+                    <input
+                        type='radio'
+                        value='Red'
+                    />
+                </div>
+
+                <div style={{background: 'white'}}>
+                    <p>Select shapes</p>
+                    <input
+                        type='radio'
+                        value='Red'
+                    />
+                </div> */}
+
+                
             </div>
         </div>
     )

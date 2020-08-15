@@ -1,14 +1,33 @@
 
 .cell {
-    width: 100px;
-    height: 100px;
+    display: flex;
+    width: 50px;
+    height: 50px;
     border: 1px #fff solid;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .shape {
+        min-width: 24px;
+        min-height: 25px;
+        border-radius: 50%;
+    }
 }
 
 .white {
     background-color: grey;
+
 }
 
 .black {
     background-color: #000;
+}
+
+.ebony {
+    background-color: #282C35;
+}
+
+.red {
+    background-color: red ;
 }

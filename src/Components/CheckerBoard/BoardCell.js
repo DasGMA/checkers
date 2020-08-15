@@ -2,20 +2,21 @@ import React from 'react';
 import '../../Styles/cell.scss'
 
 
-export default function BoardCell(props) {
-    const renderShape = () => {
+export default function BoardCell({ first, last, shape, black}) {
+    const { top, bottom } = shape;
 
-        if(props.first) {
-           return  <div className='shape red'></div>
+    const renderShape = () => {
+         if(first) {
+           return  <div className={`shape ${top.shape} ${top.color}`}></div>
         }
 
-        if(props.last) {
-            return  <div className='shape black'></div>
+        if(last) {
+            return  <div className={`shape ${bottom.shape} ${bottom.color}`}></div>
          }
     }
 
     return (
-        <div className = {props.black ? 'cell ebony' : 'cell white'}>
+        <div className = {black ? 'cell ebony' : 'cell white'}>
             {renderShape()}
         </div>
     )

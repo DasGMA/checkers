@@ -9,9 +9,8 @@
     align-items: center;
 
     .shape {
-        min-width: 24px;
+        min-width: 25px;
         min-height: 25px;
-        border-radius: 50%;
     }
 }
 
@@ -30,4 +29,24 @@
 
 .red {
     background-color: red ;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.green {
+    background-color: green;
+}
+
+.pink {
+    background-color: pink;
+}
+
+.circle { 
+    border-radius: 50%;
 }

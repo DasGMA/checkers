@@ -44,7 +44,9 @@ export default function CheckerBaord() {
 
         switch(name) {
             case 'gridSize':
-                setSize(size => ({...size, row: value, column: value}));
+                if (value > 0) {
+                    setSize(size => ({...size, row: value, column: value}));
+                }
                 return;
             case 'top-shape-color':
                 setShape(shape => ({
@@ -84,65 +86,61 @@ export default function CheckerBaord() {
         }
     }
 
-console.log(shape)
-
     return (
         <div className='checker-board'>
-            <div className='board'>
-            {renderBoard()}
+            <div>
+                <label style={{color: 'white'}}>Select top color</label>
+                <select
+                    name='top-shape-color'
+                    onChange={handleChange}
+                >
+                    <option value='red'>Select color</option>
+                    <option value='blue'>Blue</option>
+                    <option value='yellow'>Yellow</option>
+                </select>
+
+                <label style={{color: 'white'}}>Select top shape</label>
+                <select
+                    name='top-shape'
+                    onChange={handleChange}
+                >
+                    <option value='circle'>Select color</option>
+                    <option value='square'>Square</option>
+                    <option value='oval'>Oval</option>
+                </select>
             </div>
-            <div style={{display: 'flex', flexDirection: 'column'}}>
-                <label style={{color: 'white'}}>CHANGE BOARD SIZE</label>
+            <div className='board'>
+                {renderBoard()}
+            </div>
+            <div>
+                <label style={{color: 'white'}}>Select bottom color</label>
+                <select
+                    name='bottom-shape-color'
+                    onChange={handleChange}
+                >
+                    <option value='black'>Select color</option>
+                    <option value='green'>Green</option>
+                    <option value='pink'>Pink</option>
+                </select>
+
+                <label style={{color: 'white'}}>Select bottom shape</label>
+                <select
+                    name='bottom-shape'
+                    onChange={handleChange}
+                >
+                    <option value='circle'>Select color</option>
+                    <option value='square'>Square</option>
+                    <option value='oval'>Oval</option>
+                </select>
+            </div>
+            <div>
+                <p style={{color: 'white'}}>CHANGE BOARD SIZE</p>
                 <input 
                     type='number'
                     value={size.column}
                     onChange={handleChange}
                     name='gridSize'
                 />
-
-               <div style={{background: 'white'}}>
-                    <label>Select top color</label>
-                    <select
-                        name='top-shape-color'
-                        onChange={handleChange}
-                    >
-                        <option value='red'>Select color</option>
-                        <option value='blue'>Blue</option>
-                        <option value='yellow'>Yellow</option>
-                    </select>
-
-                    <label>Select bottom color</label>
-                    <select
-                        name='bottom-shape-color'
-                        onChange={handleChange}
-                    >
-                        <option value='black'>Select color</option>
-                        <option value='green'>Green</option>
-                        <option value='pink'>Pink</option>
-                    </select>
-                </div>
-
-                <div style={{background: 'white'}}>
-                    <label>Select top shape</label>
-                    <select
-                        name='top-shape'
-                        onChange={handleChange}
-                    >
-                        <option value='circle'>Select color</option>
-                        <option value='square'>Square</option>
-                        <option value='oval'>Oval</option>
-                    </select>
-
-                    <label>Select top shape</label>
-                    <select
-                        name='bottom-shape'
-                        onChange={handleChange}
-                    >
-                        <option value='circle'>Select color</option>
-                        <option value='square'>Square</option>
-                        <option value='oval'>Oval</option>
-                    </select>
-                </div>
             </div>
         </div>
     )

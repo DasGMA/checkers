@@ -15,6 +15,10 @@ export default function CheckerBaord() {
         }
     });
 
+    const toggleCell = () => {
+
+    }
+
     const renderBoard = () => {
         let newGrid = [];
         let row = [];
@@ -28,6 +32,8 @@ export default function CheckerBaord() {
                         first={j < 2} 
                         last={size.column - j === 1 || size.column - j === 2}
                         shape={shape}
+                        coordinates={{i: i, j: j}}
+                        toggleCell={toggleCell}
                     />
                 );
             }
@@ -104,7 +110,7 @@ export default function CheckerBaord() {
                     name='top-shape'
                     onChange={handleChange}
                 >
-                    <option value='circle'>Select color</option>
+                    <option value='circle'>Select shape</option>
                     <option value='square'>Square</option>
                     <option value='oval'>Oval</option>
                 </select>
@@ -128,7 +134,7 @@ export default function CheckerBaord() {
                     name='bottom-shape'
                     onChange={handleChange}
                 >
-                    <option value='circle'>Select color</option>
+                    <option value='circle'>Select shape</option>
                     <option value='square'>Square</option>
                     <option value='oval'>Oval</option>
                 </select>

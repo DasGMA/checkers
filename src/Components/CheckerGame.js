@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CheckerBaord from './CheckerBoard/CheckerBoard';
-import initializeCheckers from './Helpers/initializeGame';
+import initializeCheckers from './Helpers/initializeCheckers';
 
 function CheckerGame() {
   const [state, setState] = useState({

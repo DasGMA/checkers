@@ -19,7 +19,8 @@ function CheckerGame() {
             color: 'black'
         }
     },
-    selectedChecker: null
+    selectedChecker: null,
+    possibleMoves: []
 });
 
 useEffect(() => {
@@ -38,12 +39,14 @@ const toggleChecker = (position = null) => {
   } else if (position === null) {
     setState(state => ({
       ...state,
-      selectedChecker: null
+      selectedChecker: null,
+      possibleMoves: []
     }));
   } else {
     setState(state => ({
       ...state,
-      selectedChecker: null
+      selectedChecker: null,
+      possibleMoves: []
     }));
   }
 }
@@ -52,7 +55,7 @@ const handleMove = (position) => {
   toggleChecker(position);
   
   if (position !== (state.checkers[position] && state.checkers[position].coordinates.i)) {
-    if (state.checkers[state.selectedChecker]) {
+    if (state.checkers[state.selectedChecker] && state.checkers[state.selectedChecker].possibleMoves().includes(position)) {
       const newPosition = state.checkers[state.selectedChecker].move(position);
       state.checkers[newPosition.i] = state.checkers[state.selectedChecker];
       setState({
@@ -67,8 +70,6 @@ const handleMove = (position) => {
     }
   }
 }
-
-console.log(state.checkers)
 
   return (
     <div className="checkerGame">

@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './Styles/index.scss';
-import App from './Components/App';
+import CheckerGame from './Components/CheckerGame';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CheckerGame />
   </React.StrictMode>,
   document.getElementById('root')
 );

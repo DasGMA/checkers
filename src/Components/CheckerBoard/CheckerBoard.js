@@ -1,43 +1,33 @@
-import React, {useState} from 'react';
+import React from 'react';
 import BoardCell from './BoardCell';
 import '../../Styles/checkerBoard.scss';
 
-export default function CheckerBaord() {
-    const [size, setSize] = useState({ row: 8, column: 8 });
-    const [shape, setShape] = useState({
-        top: {
-            shape: 'circle',
-            color: 'red'
-        },
-        bottom: {
-            shape: 'circle',
-            color: 'black'
-        }
-    });
+export default function CheckerBaord({ state, setState }) {
+    
 
-    const toggleCell = () => {
+    const toggleChecker = (coordinates) => {
+         console.log(coordinates)
+    }
 
+    const renderCell = (index, squareColor) => {
+        return <BoardCell 
+                    key = {index} 
+                    black={squareColor}
+                    checker={state.checkers[index] ? state.checkers[index].player : null}
+                    state={state}
+                    toggleChecker={() => toggleChecker(index)}
+                />
     }
 
     const renderBoard = () => {
         let newGrid = [];
         let row = [];
 
-        for (let i = 0; i < size.column; i ++) {
-            for (let j = 0; j < size.row; j ++) {
-                row.push(
-                    <BoardCell 
-                        key = {[i, j]} 
-                        black={(i + j)%2 === 0} 
-                        first={j < 2} 
-                        last={size.column - j === 1 || size.column - j === 2}
-                        shape={shape}
-                        coordinates={{i: i, j: j}}
-                        toggleCell={toggleCell}
-                    />
-                );
+        for (let i = 0; i < state.size.column; i ++) {
+            for (let j = 0; j < state.size.row; j ++) {
+                const squareColor = (i % 2 === 0 && j % 2 === 0) || (!(i % 2 === 0) && !(j % 2 === 0));
+                row.push(renderCell((j * state.size.row) + i, squareColor));
             }
-            
             newGrid.push(<div className="row" key={i}>{row}</div>);
             row = [];
         }
@@ -50,40 +40,57 @@ export default function CheckerBaord() {
 
         switch(name) {
             case 'gridSize':
-                if (value > 0) {
-                    setSize(size => ({...size, row: value, column: value}));
+                if (value > 4) {
+                    setState(state => ({
+                        ...state,
+                        size: {
+                            ...state.size, row: value, column: value
+                        }
+                    }));
                 }
                 return;
             case 'top-shape-color':
-                setShape(shape => ({
-                    ...shape,
-                    top: {
-                        ...shape.top, color: value
+                setState(state => ({
+                    ...state,
+                    shape: {
+                        ...state.shape,
+                        top: {
+                            ...state.shape.top, color: value
+                        }
                     }
                 }));
                 return;
             case 'bottom-shape-color':
-                setShape(shape => ({
-                    ...shape,
-                    bottom: {
-                        ...shape.bottom, color: value
+                setState(state => ({
+                    ...state,
+                    shape: {
+                        ...state.shape,
+                        bottom: {
+                            ...state.shape.bottom, color: value
+                        }
                     }
                 }));
                 return;
 
             case 'top-shape':
-                setShape(shape => ({
-                    ...shape,
-                    top: {
-                        ...shape.top, shape: value
+                setState(state => ({
+                    ...state,
+                    shape: {
+                        ...state.shape,
+                        top: {
+                            ...state.shape.top, shape: value
+                        }
                     }
                 }));
                 return;
             case 'bottom-shape':
-                setShape(shape => ({
-                    ...shape,
-                    bottom: {
-                        ...shape.bottom, shape: value
+                setState(state => ({
+                    ...state,
+                    shape: {
+                        ...state.shape,
+                        bottom: {
+                            ...state.shape.bottom, shape: value
+                        }
                     }
                 }));
                 return;
@@ -143,7 +150,7 @@ export default function CheckerBaord() {
                 <p style={{color: 'white'}}>CHANGE BOARD SIZE</p>
                 <input 
                     type='number'
-                    value={size.column}
+                    value={state.size.column}
                     onChange={handleChange}
                     name='gridSize'
                 />

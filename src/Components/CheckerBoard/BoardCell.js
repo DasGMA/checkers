@@ -2,28 +2,22 @@ import React from 'react';
 import '../../Styles/cell.scss'
 
 
-export default function BoardCell({ first, last, shape, black, toggleCell, coordinates}) {
-    const { top, bottom } = shape;
-
-    const renderShape = () => {
-         if(first) {
-           return  <div 
-                        className={`shape ${top.shape} ${top.color}`}
-                        onClick = {() => toggleCell(coordinates)}
-                    ></div>
+export default function BoardCell({ black, toggleChecker, checker, state}) {
+    
+    const checkerStyle = () => {
+        if (checker === 'player1') {
+            return `shape ${state.shape.top.shape} ${state.shape.top.color}`;
+        } else if (checker === 'player2') {
+            return `shape ${state.shape.bottom.shape} ${state.shape.bottom.color}`;
         }
-
-        if(last) {
-            return  <div 
-                        className={`shape ${bottom.shape} ${bottom.color}`}
-                        onClick = {() => toggleCell(coordinates)}
-                    ></div>
-         }
     }
-
+    
     return (
-        <div className = {black ? 'cell ebony' : 'cell white'}>
-            {renderShape()}
+        <div 
+            className = {black ? 'cell ebony' : 'cell white'}
+            onClick = {toggleChecker}
+        >
+            <div className={checkerStyle()}></div>
         </div>
     )
 }

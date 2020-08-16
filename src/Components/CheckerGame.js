@@ -18,19 +18,39 @@ function CheckerGame() {
             shape: 'circle',
             color: 'black'
         }
-    }
+    },
+    selectedChecker: null
 });
 
 useEffect(() => {
     setState(state => ({
       ...state, checkers: initializeCheckers(state)
     }))
-},[state.size])
+},[state.size]);
 
+
+const toggleChecker = (coordinates) => {
+  if (state.selectedChecker !== coordinates) {
+    setState(state => ({
+      ...state,
+      selectedChecker: coordinates
+    }));
+  } else {
+    setState(state => ({
+      ...state,
+      selectedChecker: null
+    }));
+  }
+    
+}
 
   return (
     <div className="checkerGame">
-      <CheckerBaord state={state} setState={setState}/>
+      <CheckerBaord 
+        state={state} 
+        setState={setState} 
+        toggleChecker={(coordinates) => toggleChecker(coordinates)}
+      />
     </div>
   );
 }

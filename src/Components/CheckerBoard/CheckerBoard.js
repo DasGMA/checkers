@@ -2,18 +2,14 @@ import React from 'react';
 import BoardCell from './BoardCell';
 import '../../Styles/checkerBoard.scss';
 
-export default function CheckerBaord({ state, setState }) {
-    
-
-    const toggleChecker = (coordinates) => {
-         console.log(coordinates)
-    }
+export default function CheckerBaord({ state, setState, toggleChecker }) {
 
     const renderCell = (index, squareColor) => {
         return <BoardCell 
                     key = {index} 
                     black={squareColor}
-                    checker={state.checkers[index] ? state.checkers[index].player : null}
+                    player={state.checkers[index] ? state.checkers[index].player : null}
+                    coordinates={state.checkers[index] ? state.checkers[index].coordinates.i : null}
                     state={state}
                     toggleChecker={() => toggleChecker(index)}
                 />

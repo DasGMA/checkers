@@ -56,7 +56,7 @@ const handleMove = (position) => {
   toggleChecker(position);
   
   if (position !== (state.checkers[position] && state.checkers[position].coordinates.i)) {
-    if (state.checkers[state.selectedChecker] && state.checkers[state.selectedChecker].possibleMoves().includes(position)) {
+    if (state.checkers[state.selectedChecker] && state.possibleMoves.includes(position)) {
       const newPosition = state.checkers[state.selectedChecker].move(position);
       state.checkers[newPosition.i] = state.checkers[state.selectedChecker];
       setState({

@@ -5,7 +5,8 @@ import '../../Styles/cell.scss'
 export default function BoardCell({ black, toggleChecker, player, state, coordinates}) {
     const selected = coordinates === state.selectedChecker && 'selected';
     const { possibleMoves } = state;
-    const possibleMove = possibleMoves.includes(coordinates) && <div className='shape circle possible'></div>;
+    const possibleMove = possibleMoves.includes(coordinates) && 
+                            <div className='shape circle possible'></div>;
 
     const checkerStyle = () => {
         if (player === 'player1') {
@@ -15,8 +16,6 @@ export default function BoardCell({ black, toggleChecker, player, state, coordin
         }
     }
 
-
-    
     return (
         <div 
             className = {black ? 'cell ebony' : 'cell white'}

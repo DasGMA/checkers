@@ -7,8 +7,8 @@ function initializeCheckers(state) {
     const bottom = gridSize - top;
 
     for (let i = 0; i < top; i ++) {
-        squares[i] = new Checker({ player: 'player1', coordinates: { i: i } });
-        squares[i + bottom] = new Checker({ player: 'player2', coordinates: { i: i + bottom } });
+        squares[i] = new Checker({ player: 'player1', coordinates: { i: i } }, top);
+        squares[i + bottom] = new Checker({ player: 'player2', coordinates: { i: i + bottom } }, bottom);
     }
 
     return squares;

@@ -29,11 +29,16 @@ useEffect(() => {
 },[state.size]);
 
 
-const toggleChecker = (coordinates) => {
-  if (state.selectedChecker !== coordinates) {
+const toggleChecker = (position = null) => {
+  if (position !== null && state.selectedChecker !== position) {
     setState(state => ({
       ...state,
-      selectedChecker: coordinates
+      selectedChecker: position
+    }));
+  } else if (position === null) {
+    setState(state => ({
+      ...state,
+      selectedChecker: null
     }));
   } else {
     setState(state => ({
@@ -41,15 +46,34 @@ const toggleChecker = (coordinates) => {
       selectedChecker: null
     }));
   }
-    
 }
+
+const handleMove = (position) => {
+  toggleChecker(position);
+  
+  if (position !== (state.checkers[position] && state.checkers[position].coordinates.i)) {
+    const newPosition = state.checkers[state.selectedChecker].move(position);
+    state.checkers[newPosition.i] = state.checkers[state.selectedChecker];
+    setState({
+      ...state,
+      checkers: {
+        ...state.checkers,
+        [newPosition.i]: state.checkers[newPosition.i] = state.checkers[state.selectedChecker],
+        [state.selectedChecker]: state.checkers[state.selectedChecker] = null
+      }
+    })
+    toggleChecker();
+  }
+}
+
+console.log(state.checkers)
 
   return (
     <div className="checkerGame">
       <CheckerBaord 
         state={state} 
         setState={setState} 
-        toggleChecker={(coordinates) => toggleChecker(coordinates)}
+        toggleChecker={(position) => handleMove(position)}
       />
     </div>
   );

@@ -52,17 +52,19 @@ const handleMove = (position) => {
   toggleChecker(position);
   
   if (position !== (state.checkers[position] && state.checkers[position].coordinates.i)) {
-    const newPosition = state.checkers[state.selectedChecker].move(position);
-    state.checkers[newPosition.i] = state.checkers[state.selectedChecker];
-    setState({
-      ...state,
-      checkers: {
-        ...state.checkers,
-        [newPosition.i]: state.checkers[newPosition.i] = state.checkers[state.selectedChecker],
-        [state.selectedChecker]: state.checkers[state.selectedChecker] = null
-      }
-    })
-    toggleChecker();
+    if (state.checkers[state.selectedChecker]) {
+      const newPosition = state.checkers[state.selectedChecker].move(position);
+      state.checkers[newPosition.i] = state.checkers[state.selectedChecker];
+      setState({
+        ...state,
+        checkers: {
+          ...state.checkers,
+          [newPosition.i]: state.checkers[newPosition.i] = state.checkers[state.selectedChecker],
+          [state.selectedChecker]: state.checkers[state.selectedChecker] = null
+        }
+      })
+      toggleChecker();
+    }
   }
 }
 

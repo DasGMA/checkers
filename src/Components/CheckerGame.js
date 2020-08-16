@@ -34,7 +34,8 @@ const toggleChecker = (position = null) => {
   if (position !== null && state.selectedChecker !== position) {
     setState(state => ({
       ...state,
-      selectedChecker: position
+      selectedChecker: position,
+      possibleMoves: state.checkers[position] ? state.checkers[position].possibleMoves() : []
     }));
   } else if (position === null) {
     setState(state => ({

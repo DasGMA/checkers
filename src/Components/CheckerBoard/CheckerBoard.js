@@ -9,7 +9,7 @@ export default function CheckerBaord({ state, setState, toggleChecker }) {
                     key = {index} 
                     black={squareColor}
                     player={state.checkers[index] ? state.checkers[index].player : null}
-                    coordinates={state.checkers[index] ? state.checkers[index].coordinates.i : null}
+                    coordinates={state.checkers[index] ? state.checkers[index].coordinates.i : index}
                     state={state}
                     toggleChecker={() => toggleChecker(index)}
                 />

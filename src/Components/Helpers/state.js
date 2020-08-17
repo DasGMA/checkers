@@ -19,7 +19,8 @@ const initialState = {
     },
     selectedChecker: null,
     possibleMoves: [],
-    start: false
+    start: false,
+    saved: false
   };
   
   const savedState = () => {

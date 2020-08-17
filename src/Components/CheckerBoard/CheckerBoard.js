@@ -102,6 +102,7 @@ export default function CheckerBaord({ state, setState, toggleChecker, save, res
                 <select
                     name='top-shape-color'
                     onChange={handleChange}
+                    value={state.shape.top.color}
                 >
                     <option value='red'>Select color</option>
                     <option value='blue'>Blue</option>
@@ -112,6 +113,7 @@ export default function CheckerBaord({ state, setState, toggleChecker, save, res
                 <select
                     name='top-shape'
                     onChange={handleChange}
+                    value={state.shape.top.shape}
                 >
                     <option value='circle'>Select shape</option>
                     <option value='square'>Square</option>
@@ -126,6 +128,7 @@ export default function CheckerBaord({ state, setState, toggleChecker, save, res
                 <select
                     name='bottom-shape-color'
                     onChange={handleChange}
+                    value={state.shape.bottom.color}
                 >
                     <option value='black'>Select color</option>
                     <option value='green'>Green</option>
@@ -136,6 +139,7 @@ export default function CheckerBaord({ state, setState, toggleChecker, save, res
                 <select
                     name='bottom-shape'
                     onChange={handleChange}
+                    value={state.shape.bottom.shape}
                 >
                     <option value='circle'>Select shape</option>
                     <option value='square'>Square</option>

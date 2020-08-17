@@ -5,14 +5,22 @@ import { initialState, savedState } from './Helpers/state';
 
 function CheckerGame() {
   const [state, setState] = useState(savedState ? savedState : initialState);
+  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     if (state.checkers.length === 0 && state.start) {
       setState(state => ({
-        ...state, checkers: initializeCheckers(state)
+        ...state,
+        checkers: initializeCheckers(state)
       }))
     }
   },[state.start, state.checkers]);
+
+  useEffect(() => {
+    saved && localStorage.setItem('state', JSON.stringify(state));
+
+    return () => setSaved(false);
+  }, [saved, state])
 
 
   const toggleChecker = (position = null) => {
@@ -59,37 +67,22 @@ function CheckerGame() {
 
   const reset = () => {
     localStorage.removeItem('state');
-    setState({
-      checkers: [],
-      size: {
-          row: 8,
-          column: 8
-      },
-      shape: {
-          top: {
-              shape: 'circle',
-              color: 'red'
-          },
-          bottom: {
-              shape: 'circle',
-              color: 'black'
-          }
-      },
-      selectedChecker: null,
-      possibleMoves: [],
-      start: false
-    })
+    setState(initialState);
   }
 
   const save = () => {
-    localStorage.setItem('state', JSON.stringify(state));
+    setSaved(true);
+    setState(state => ({
+      ...state,
+      saved: true
+    }));
   }
 
   const start = () => {
     setState(state => ({
       ...state,
       start: true
-    }))
+    }));
   }
 
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../Styles/cell.scss'
+import '../../Styles/cell.scss';
 
 
 export default function BoardCell({ black, toggleChecker, player, state, coordinates}) {

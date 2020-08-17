@@ -1,63 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import CheckerBaord from './CheckerBoard/CheckerBoard';
 import initializeCheckers from './Helpers/initializeCheckers';
-
-const initialState = {
-  checkers: [],
-  size: {
-      row: 8,
-      column: 8
-  },
-  shape: {
-      top: {
-          shape: 'circle',
-          color: 'red'
-      },
-      bottom: {
-          shape: 'circle',
-          color: 'black'
-      }
-  },
-  selectedChecker: null,
-  possibleMoves: [],
-  start: false
-};
-
-const savedState = () => {
-  if (localStorage.getItem('state')) {
-    let { checkers, ...rest } = JSON.parse(localStorage.getItem('state'));
-    for (let checker of Object.values(checkers)) {
-      if (checker) {
-        checker.move = function(newCoordinates) {
-          return this.coordinates = { i: newCoordinates };
-        }
-        checker.possibleMoves = function() {
-          let arr = [];
-          let count = 0;
-          if (this.player === 'player1') {
-            while(count !== 4) {
-              arr.push(this.coordinates.i + 7 + count);
-              count += 2;
-            }
-            return arr;
-          } else {
-            while(count !== 4) {
-              arr.push(this.coordinates.i - 7 - count);
-              count += 2;
-            }
-          return arr;
-        }
-      }
-    }
-  }
-    return {checkers, ...rest};
-  } else {
-    return null;
-  }
-}
+import { initialState, savedState } from './Helpers/state';
 
 function CheckerGame() {
-  const [state, setState] = useState(savedState() ? savedState() : initialState);
+  const [state, setState] = useState(savedState ? savedState : initialState);
 
   useEffect(() => {
     if (state.checkers.length === 0 && state.start) {
@@ -92,7 +39,7 @@ function CheckerGame() {
 
   const handleMove = (position) => {
     toggleChecker(position);
-    
+    console.log(position)
     if (position !== (state.checkers[position] && state.checkers[position].coordinates.i)) {
       if (state.checkers[state.selectedChecker] && state.possibleMoves.includes(position)) {
         const newPosition = state.checkers[state.selectedChecker].move(position);

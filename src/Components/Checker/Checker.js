@@ -1,27 +1,11 @@
+import possibleMoves from "../Helpers/possibleMoves";
+import move from "../Helpers/move";
 
-export default function Checker({ player, coordinates }) {
+export default function Checker({ player, coordinates, edges }) {
     this.player = player;
     this.coordinates = coordinates;
+    this.edges = edges;
 }
 
-Checker.prototype.move = function(newCoordinates) {
-    return this.coordinates = { i: newCoordinates };
-}
-
-Checker.prototype.possibleMoves = function() {
-    let arr = [];
-    let count = 0;
-    if (this.player === 'player1') {
-        while(count !== 4) {
-            arr.push(this.coordinates.i + 7 + count);
-            count += 2;
-        }
-        return arr;
-    } else {
-        while(count !== 4) {
-            arr.push(this.coordinates.i - 7 - count);
-            count += 2;
-        }
-        return arr;
-    }
-}
+Checker.prototype.move = move;
+Checker.prototype.possibleMoves = possibleMoves;

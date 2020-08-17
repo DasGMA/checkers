@@ -2,16 +2,17 @@ export default function possibleMoves() {
     let arr = [];
     let count = 0;
     const edges = {...this.edges.right, ...this.edges.left};
+    const size = Object.entries(edges).length / 2 - 1;
 
     if (this.player === 'player1') {
         while(count !== 4) {
-            arr.push(this.coordinates.i + 7 + count);
+            arr.push(this.coordinates.i + size + count);
             count += 2;
         }
         
     } else {
         while(count !== 4) {
-            arr.push(this.coordinates.i - 7 - count);
+            arr.push(this.coordinates.i - size - count);
             count += 2;
         }
     }

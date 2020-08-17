@@ -23,7 +23,7 @@ export default function CheckerBaord({ state, setState, toggleChecker, save, res
                     toggleChecker={() => toggleChecker(index)}
                 />
     }
-console.log(Object.keys(errors).length)
+
     const renderBoard = () => {
         let newGrid = [];
         let row = [];

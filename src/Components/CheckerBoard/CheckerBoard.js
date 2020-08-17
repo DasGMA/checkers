@@ -106,7 +106,7 @@ export default function CheckerBaord({ state, setState, toggleChecker, save, res
                 return;
         }
     }
-console.log(errors)
+
     return (
         <div className='checker-board'>
             <div>

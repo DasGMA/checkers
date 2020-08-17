@@ -1,5 +1,27 @@
 import Checker from '../Checker/Checker';
 
+function Edges() {
+    this.right = (gridSize) => {
+        const edgesMap = {};
+        for (let i = 0; i < gridSize; i += Math.sqrt(gridSize)) {
+            if (!edgesMap[i]) {
+                edgesMap[i] = i;
+            }
+        }
+        return edgesMap;
+    }
+
+    this.left = (gridSize) => {
+        const edgesMap = {};
+        for (let i = 0; i < gridSize; i += Math.sqrt(gridSize)) {
+            if (!edgesMap[i]) {
+                edgesMap[i] = i;
+            }
+        }
+        return edgesMap;
+    }
+}
+
 function initializeCheckers(state) {
     const gridSize = state.size.row * state.size.column;
     const squares = Array(gridSize).fill(null);

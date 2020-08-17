@@ -2,7 +2,7 @@ import React from 'react';
 import BoardCell from './BoardCell';
 import '../../Styles/checkerBoard.scss';
 
-export default function CheckerBaord({ state, setState, toggleChecker }) {
+export default function CheckerBaord({ state, setState, toggleChecker, save, reset, start }) {
 
     const renderCell = (index, squareColor) => {
         return <BoardCell 
@@ -150,6 +150,11 @@ export default function CheckerBaord({ state, setState, toggleChecker }) {
                     onChange={handleChange}
                     name='gridSize'
                 />
+            </div>
+            <div>
+                <button onClick={start}>START</button>
+                <button onClick={save}>SAVE</button>
+                <button onClick={reset}>RESET</button>
             </div>
         </div>
     )

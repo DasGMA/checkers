@@ -59,7 +59,8 @@ function CheckerGame() {
             [newPosition.i]: state.checkers[newPosition.i] = state.checkers[state.selectedChecker],
             [state.selectedChecker]: state.checkers[state.selectedChecker] = null
           }
-        })
+        });
+
         toggleChecker();
       }
     }

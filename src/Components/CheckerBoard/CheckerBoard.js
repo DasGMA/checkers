@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import BoardCell from './BoardCell';
 import '../../Styles/checkerBoard.scss';
 
 export default function CheckerBaord({ state, setState, toggleChecker, save, reset, start }) {
+    const [errors, setError] = useState({});
+
+    useEffect(() => {
+        if (Object.keys(errors).length > 0) {
+            setTimeout(() => {
+                setError({});    
+            }, 2000);
+        }
+    }, [errors])
 
     const renderCell = (index, squareColor) => {
         return <BoardCell 
@@ -14,7 +23,7 @@ export default function CheckerBaord({ state, setState, toggleChecker, save, res
                     toggleChecker={() => toggleChecker(index)}
                 />
     }
-
+console.log(Object.keys(errors).length)
     const renderBoard = () => {
         let newGrid = [];
         let row = [];
@@ -36,13 +45,16 @@ export default function CheckerBaord({ state, setState, toggleChecker, save, res
 
         switch(name) {
             case 'gridSize':
-                if (value > 4) {
+                if (value > 4 && !state.start) {
                     setState(state => ({
                         ...state,
                         size: {
                             ...state.size, row: value, column: value
                         }
                     }));
+                } else {
+                    const resizeError = 'Can not resize the board while game is in progress.';
+                    setError(errors => ({...errors, 'resizeError': resizeError}));
                 }
                 return;
             case 'top-shape-color':
@@ -94,7 +106,7 @@ export default function CheckerBaord({ state, setState, toggleChecker, save, res
                 return;
         }
     }
-
+console.log(errors)
     return (
         <div className='checker-board'>
             <div>
@@ -159,6 +171,9 @@ export default function CheckerBaord({ state, setState, toggleChecker, save, res
                 <button onClick={start}>START</button>
                 <button onClick={save}>SAVE</button>
                 <button onClick={reset}>RESET</button>
+            </div>
+            <div>
+                {errors['resizeError'] && <p style={{color: 'white'}}>{errors['resizeError']}</p>}
             </div>
         </div>
     )
